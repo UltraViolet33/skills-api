@@ -4,103 +4,103 @@
         "level": 0
     },
     "skills": {
-        "compulsory_skills": [
+        "compulsory": [
             {
-                "id": "64ca9a3a39cec",
+                "id": "64cb4f0685868",
                 "name": "nutrition",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39cf4",
+                "id": "64cb4f0685882",
                 "name": "physical activity",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39cf8",
+                "id": "64cb4f0685887",
                 "name": "sleep",
                 "level": 15
             }
         ],
-        "basic_skills": [
+        "basic": [
             {
-                "id": "64ca9a3a39cff",
+                "id": "64cb4f0685890",
                 "name": "history",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d03",
+                "id": "64cb4f0685895",
                 "name": "literature",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d07",
+                "id": "64cb4f068589a",
                 "name": "cinema",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d0b",
+                "id": "64cb4f068589e",
                 "name": "decision making",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d0f",
+                "id": "64cb4f06858a2",
                 "name": "critical thinking",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d13",
+                "id": "64cb4f06858a6",
                 "name": "teamwork",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d17",
+                "id": "64cb4f06858ab",
                 "name": "real-world sociability",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d1b",
+                "id": "64cb4f06858af",
                 "name": "virtual sociability",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d1f",
+                "id": "64cb4f06858b3",
                 "name": "public speaking",
                 "level": 15
             }
         ],
-        "personal_skills": [
+        "personal": [
             {
-                "id": "64ca9a3a39d25",
+                "id": "64cb4f06858ba",
                 "name": "computer literacy",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d29",
+                "id": "64cb4f06858bf",
                 "name": "ambition",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d2d",
+                "id": "64cb4f06858c3",
                 "name": "daring",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d31",
+                "id": "64cb4f06858c7",
                 "name": "courage",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d35",
+                "id": "64cb4f06858cb",
                 "name": "creative",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d38",
+                "id": "64cb4f06858d0",
                 "name": "optimism",
                 "level": 15
             },
             {
-                "id": "64ca9a3a39d3c",
+                "id": "64cb4f06858d4",
                 "name": "perseverance",
                 "level": 15
             }
@@ -108,7 +108,7 @@
     },
     "actions": [
         {
-            "id": "64ca9a3a39cd1",
+            "id": "64cb4f068556d",
             "id_skill": 1,
             "name": "run 1 hour",
             "date": "22:10:2023",

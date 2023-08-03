@@ -49,11 +49,11 @@ $data["user"] = [
 
 $skills = [];
 
-$skills["compulsory_skills"] = array_map("return_array_skill", COMPULSORY_SKILLS);
+$skills["compulsory"] = array_map("return_array_skill", COMPULSORY_SKILLS);
 
-$skills["basic_skills"] = array_map("return_array_skill", BASIC_SKILLS);
+$skills["basic"] = array_map("return_array_skill", BASIC_SKILLS);
 
-$skills["personal_skills"] = array_map("return_array_skill", PERSONAL_SKILLS);
+$skills["personal"] = array_map("return_array_skill", PERSONAL_SKILLS);
 
 $data["skills"] = $skills;
 
