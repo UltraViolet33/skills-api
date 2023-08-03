@@ -8,7 +8,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\Factory\AppFactory;
-use Respect\Validation\Validator as v;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -17,18 +16,17 @@ $app = AppFactory::create();
 $app->addBodyParsingMiddleware();
 
 $app->addRoutingMiddleware();
-$app->add(new BasePathMiddleware($app));
-$app->addErrorMiddleware(true, true, true);
 
+$app->add(new BasePathMiddleware($app));
+
+$app->addErrorMiddleware(true, true, true);
 
 const PATH_JSON_DATA = __DIR__ . "/../src/data/data.json";
 
 $jsonHandler = new JsonHandler(PATH_JSON_DATA);
 
 $user = new UserManager($jsonHandler);
-
 $skills = new SkillsManager($jsonHandler);
-
 $action = new ActionManager($jsonHandler);
 
 
@@ -37,8 +35,8 @@ $app->get('/', function (Request $request, Response $response) {
     return $response;
 });
 
-$app->get('/user-data', function (Request $request, Response $response) use ($user) {
 
+$app->get('/user-data', function (Request $request, Response $response) use ($user) {
     $userData = $user->getData();
     $response->getBody()->write(json_encode($userData));
 
@@ -50,7 +48,6 @@ $app->get('/user-data', function (Request $request, Response $response) use ($us
 
 
 $app->get('/all-skills', function (Request $request, Response $response) use ($skills) {
-
     $allSkills = $skills->getAll();
     $response->getBody()->write(json_encode($allSkills));
 
@@ -61,9 +58,7 @@ $app->get('/all-skills', function (Request $request, Response $response) use ($s
 });
 
 
-$app->get('/specific-skills', function (Request $request, Response $response) use ($skills, $app) {
-
-
+$app->get('/specific-skills', function (Request $request, Response $response) use ($skills) {
     $params = $request->getQueryParams();
     $category = $params["cat"];
 
@@ -76,7 +71,7 @@ $app->get('/specific-skills', function (Request $request, Response $response) us
 
 });
 
-$app->post('/actions/add', function (Request $request, Response $response, array $args) use ($action) {
+$app->post('/actions/add', function (Request $request, Response $response, array $args) use ($action, $skills) {
 
     $postData = ["id_skill", "name", "level"];
     $data = $request->getParsedBody();
@@ -90,6 +85,20 @@ $app->post('/actions/add', function (Request $request, Response $response, array
         }
     }
 
+    // check id skill
+
+    try {
+
+        $actionSkill = $skills->getById($data["id_skill"]);
+    } catch (Exception $e) {
+        $response->getBody()->write(json_encode(["error" => "Id skill is not valid"]));
+        return $response
+            ->withHeader('content-type', 'application/json')
+            ->withStatus(400);
+
+    }
+
+
     $newAction = [];
 
     $newAction = [
@@ -102,7 +111,8 @@ $app->post('/actions/add', function (Request $request, Response $response, array
 
     $action->addNewAction($newAction);
 
-    //No errors
+    // add level skill
+
     $response->getBody()->write(json_encode("result"));
     return $response
         ->withHeader('content-type', 'application/json')
@@ -111,16 +121,13 @@ $app->post('/actions/add', function (Request $request, Response $response, array
 });
 
 
-
 $app->get('/all-actions', function (Request $request, Response $response) use ($action) {
-
     $allActions = $action->getAll();
     $response->getBody()->write(json_encode($allActions));
 
     return $response
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
-
 });
 
 $app->run();
