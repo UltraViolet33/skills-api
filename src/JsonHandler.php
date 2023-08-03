@@ -20,7 +20,15 @@ class JsonHandler
     }
 
 
+    public function writeData(string $key, array $newData): void
+    {
+        $data = $this->getData();
+        $data[$key] = $newData;
 
+        $fp = fopen($this->path, 'w');
+        fwrite($fp, json_encode($data));
+        fclose($fp);
+    }
 }
 
 

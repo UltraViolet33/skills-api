@@ -1,5 +1,6 @@
 <?php
 
+use App\Data\ActionManager;
 use App\Data\SkillsManager;
 use App\Data\UserManager;
 use App\JsonHandler;
@@ -7,6 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\Factory\AppFactory;
+use Respect\Validation\Validator as v;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -26,6 +28,8 @@ $jsonHandler = new JsonHandler(PATH_JSON_DATA);
 $user = new UserManager($jsonHandler);
 
 $skills = new SkillsManager($jsonHandler);
+
+$action = new ActionManager($jsonHandler);
 
 
 $app->get('/', function (Request $request, Response $response) {
@@ -49,7 +53,7 @@ $app->get('/all-skills', function (Request $request, Response $response) use ($s
 
     $allSkills = $skills->getAll();
     $response->getBody()->write(json_encode($allSkills));
-    
+
     return $response
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
@@ -62,40 +66,61 @@ $app->get('/specific-skills', function (Request $request, Response $response) us
 
     $params = $request->getQueryParams();
     $category = $params["cat"];
-    
+
     $skillsData = $skills->getSpecificSkills($category);
     $response->getBody()->write(json_encode($skillsData));
-    
+
     return $response
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 
 });
 
-$app->post('/user-data/add', function (Request $request, Response $response, array $args) {
+$app->post('/actions/add', function (Request $request, Response $response, array $args) use ($action) {
 
+    $postData = ["id_skill", "name", "level"];
     $data = $request->getParsedBody();
-    $name = $data["name"];
-    $level = $data["level"];
 
-
-    try {
-
-        $result = ["msg" => "ok", "user" => ["name" => $name, "level" => $level]];
-        $response->getBody()->write(json_encode($result));
-        return $response
-            ->withHeader('content-type', 'application/json')
-            ->withStatus(200);
-    } catch (PDOException $e) {
-        $error = array(
-            "message" => $e->getMessage()
-        );
-
-        $response->getBody()->write(json_encode($error));
-        return $response
-            ->withHeader('content-type', 'application/json')
-            ->withStatus(500);
+    foreach ($postData as $value) {
+        if (!isset($data[$value]) || empty($data[$value])) {
+            $response->getBody()->write(json_encode(["error" => "Missing fields"]));
+            return $response
+                ->withHeader('content-type', 'application/json')
+                ->withStatus(400);
+        }
     }
+
+    $newAction = [];
+
+    $newAction = [
+        "id" => uniqid(),
+        "id_skill" => $data["id_skill"],
+        "name" => $data["name"],
+        "level" => $data["level"],
+        "timestamp" => time()
+    ];
+
+    $action->addNewAction($newAction);
+
+    //No errors
+    $response->getBody()->write(json_encode("result"));
+    return $response
+        ->withHeader('content-type', 'application/json')
+        ->withStatus(200);
+
+});
+
+
+
+$app->get('/all-actions', function (Request $request, Response $response) use ($action) {
+
+    $allActions = $action->getAll();
+    $response->getBody()->write(json_encode($allActions));
+
+    return $response
+        ->withHeader('content-type', 'application/json')
+        ->withStatus(200);
+
 });
 
 $app->run();
