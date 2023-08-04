@@ -28,6 +28,7 @@ class SkillsManager
         return $allSkills[$skills];
     }
 
+
     public function getById(string $id): array
     {
         $allSkills = $this->getAll();
@@ -64,15 +65,13 @@ class SkillsManager
     }
 
 
-    public function updateLevel(string $idSkill, float $level): array
+    public function updateLevel(string $idSkill, int $level): array
     {
         $skill = $this->getById($idSkill);
+        $value = 0.2 * $level;
+        $skill["level"] = round($value + $skill["level"], 2);
 
-        $test = 0.2 * $level;
-
-        $skill["level"] = bcadd((string)$skill['level'], (string) $test);
         $this->editSkill($idSkill, $skill);
-
         return $skill;
     }
 }

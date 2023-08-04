@@ -32,6 +32,17 @@ $skills = new SkillsManager($jsonHandler);
 $action = new ActionManager($jsonHandler);
 
 
+function checkLastSkillsActions()
+{
+
+    // check for the last action of each skill
+    // if a skill has no action then do nothing
+    // if the last action of a skill is more than 60 days, then downgrade and mark the date
+
+    // if a skill has alredy been downgrade more than 30 days ago and has no new actions then downgrade again
+
+}
+
 $app->get('/', function (Request $request, Response $response) {
     $response->getBody()->write('Hello World!');
     return $response;
@@ -45,7 +56,6 @@ $app->get('/user-data', function (Request $request, Response $response) use ($us
     return $response
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
-
 });
 
 
@@ -56,7 +66,6 @@ $app->get('/all-skills', function (Request $request, Response $response) use ($s
     return $response
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
-
 });
 
 
@@ -87,7 +96,6 @@ $app->post('/actions/add', function (Request $request, Response $response, array
         }
     }
 
-    // check id skill
 
     try {
 
@@ -114,21 +122,17 @@ $app->post('/actions/add', function (Request $request, Response $response, array
 
     // add level skill
 
-    $nextSkill = ceil($actionSkill["level"]);
-    
+    $nextSkill = floor($actionSkill["level"] + 1);
     $newSkill = $skills->updateLevel($actionSkill["id"], $data["level"]);
 
-    if($newSkill["level"] >= $actionSkill["level"])
-    {
+    if ($newSkill["level"] >= $nextSkill) {
         $user->upgradeLevel();
     }
-    
 
-    $response->getBody()->write(json_encode("result"));
+    $response->getBody()->write(json_encode($newSkill));
     return $response
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
-
 });
 
 

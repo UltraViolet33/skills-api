@@ -1,1 +1,321 @@
-{"user":{"username":"UltraViolet33","level":3},"skills":{"compulsory":[{"id":"64cb4f0685868","name":"nutrition","level":"15"},{"id":"64cb4f0685882","name":"physical activity","level":19},{"id":"64cb4f0685887","name":"sleep","level":15}],"basic":[{"id":"64cb4f0685890","name":"history","level":15},{"id":"64cb4f0685895","name":"literature","level":15},{"id":"64cb4f068589a","name":"cinema","level":15},{"id":"64cb4f068589e","name":"decision making","level":15},{"id":"64cb4f06858a2","name":"critical thinking","level":15},{"id":"64cb4f06858a6","name":"teamwork","level":15},{"id":"64cb4f06858ab","name":"real-world sociability","level":15},{"id":"64cb4f06858af","name":"virtual sociability","level":15},{"id":"64cb4f06858b3","name":"public speaking","level":15}],"personal":[{"id":"64cb4f06858ba","name":"computer literacy","level":15},{"id":"64cb4f06858bf","name":"ambition","level":15},{"id":"64cb4f06858c3","name":"daring","level":15},{"id":"64cb4f06858c7","name":"courage","level":15},{"id":"64cb4f06858cb","name":"creative","level":15},{"id":"64cb4f06858d0","name":"optimism","level":15},{"id":"64cb4f06858d4","name":"perseverance","level":15}]},"actions":[{"id":"64ccd2547e87f","id_skill":"64cb4f0685882","name":"name action","level":5,"timestamp":1691144788},{"id":"64ccd265b4cdf","id_skill":"64cb4f0685882","name":"name action","level":5,"timestamp":1691144805},{"id":"64ccd26b7d404","id_skill":"64cb4f0685882","name":"name action","level":5,"timestamp":1691144811},{"id":"64ccd276c4669","id_skill":"64cb4f0685868","name":"name action","level":5,"timestamp":1691144822},{"id":"64ccd2b7cf04d","id_skill":"64cb4f0685868","name":"name action","level":5,"timestamp":1691144887},{"id":"64ccd2bc5a1cc","id_skill":"64cb4f0685868","name":"name action","level":5,"timestamp":1691144892},{"id":"64ccd2c192dcd","id_skill":"64cb4f0685868","name":"name action","level":5,"timestamp":1691144897},{"id":"64ccd2cb756e5","id_skill":"64cb4f0685868","name":"name action","level":4,"timestamp":1691144907},{"id":"64ccd2dee00e5","id_skill":"64cb4f0685868","name":"name action","level":1,"timestamp":1691144926},{"id":"64ccd2df5a15c","id_skill":"64cb4f0685868","name":"name action","level":1,"timestamp":1691144927},{"id":"64ccd3704b7cc","id_skill":"64cb4f0685868","name":"name action","level":1,"timestamp":1691145072},{"id":"64ccd38aa8844","id_skill":"64cb4f0685868","name":"name action","level":1,"timestamp":1691145098},{"id":"64ccd392cffc6","id_skill":"64cb4f0685868","name":"name action","level":1,"timestamp":1691145106}]}
+{
+    "user": {
+        "username": "UltraViolet33",
+        "level": 1.8
+    },
+    "skills": {
+        "compulsory": [
+            {
+                "id": "64cb4f0685868",
+                "name": "nutrition",
+                "level": 32.2
+            },
+            {
+                "id": "64cb4f0685882",
+                "name": "physical activity",
+                "level": 19
+            },
+            {
+                "id": "64cb4f0685887",
+                "name": "sleep",
+                "level": 15
+            }
+        ],
+        "basic": [
+            {
+                "id": "64cb4f0685890",
+                "name": "history",
+                "level": 15
+            },
+            {
+                "id": "64cb4f0685895",
+                "name": "literature",
+                "level": 15
+            },
+            {
+                "id": "64cb4f068589a",
+                "name": "cinema",
+                "level": 15
+            },
+            {
+                "id": "64cb4f068589e",
+                "name": "decision making",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858a2",
+                "name": "critical thinking",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858a6",
+                "name": "teamwork",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858ab",
+                "name": "real-world sociability",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858af",
+                "name": "virtual sociability",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858b3",
+                "name": "public speaking",
+                "level": 15
+            }
+        ],
+        "personal": [
+            {
+                "id": "64cb4f06858ba",
+                "name": "computer literacy",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858bf",
+                "name": "ambition",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858c3",
+                "name": "daring",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858c7",
+                "name": "courage",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858cb",
+                "name": "creative",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858d0",
+                "name": "optimism",
+                "level": 15
+            },
+            {
+                "id": "64cb4f06858d4",
+                "name": "perseverance",
+                "level": 15
+            }
+        ]
+    },
+    "actions": [
+        {
+            "id": "64ccf1d6bf329",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152854
+        },
+        {
+            "id": "64ccf1e52ee04",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152869
+        },
+        {
+            "id": "64ccf2244c055",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152932
+        },
+        {
+            "id": "64ccf22e7f20a",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152942
+        },
+        {
+            "id": "64ccf22fe5187",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152943
+        },
+        {
+            "id": "64ccf2312487f",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152945
+        },
+        {
+            "id": "64ccf2328930f",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152946
+        },
+        {
+            "id": "64ccf2347178e",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152948
+        },
+        {
+            "id": "64ccf235d8e84",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152949
+        },
+        {
+            "id": "64ccf236dc84b",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152950
+        },
+        {
+            "id": "64ccf237ea56e",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152951
+        },
+        {
+            "id": "64ccf23917bea",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 1,
+            "timestamp": 1691152953
+        },
+        {
+            "id": "64ccf23f57e6f",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 2,
+            "timestamp": 1691152959
+        },
+        {
+            "id": "64ccf24087c5f",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 2,
+            "timestamp": 1691152960
+        },
+        {
+            "id": "64ccf241b7889",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 2,
+            "timestamp": 1691152961
+        },
+        {
+            "id": "64ccf243e3b27",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 2,
+            "timestamp": 1691152963
+        },
+        {
+            "id": "64ccf2451f6b3",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 2,
+            "timestamp": 1691152965
+        },
+        {
+            "id": "64ccf24c00172",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 3,
+            "timestamp": 1691152972
+        },
+        {
+            "id": "64ccf24d09d52",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 3,
+            "timestamp": 1691152973
+        },
+        {
+            "id": "64ccf24e3f1d6",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 3,
+            "timestamp": 1691152974
+        },
+        {
+            "id": "64ccf24f5ae48",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 3,
+            "timestamp": 1691152975
+        },
+        {
+            "id": "64ccf25b98965",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152987
+        },
+        {
+            "id": "64ccf25cd9997",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152988
+        },
+        {
+            "id": "64ccf25e01bff",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152990
+        },
+        {
+            "id": "64ccf25f2bcac",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152991
+        },
+        {
+            "id": "64ccf260937f2",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152992
+        },
+        {
+            "id": "64ccf262ee6a6",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152994
+        },
+        {
+            "id": "64ccf26431cb4",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152996
+        },
+        {
+            "id": "64ccf26549d0e",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152997
+        },
+        {
+            "id": "64ccf2675e94e",
+            "id_skill": "64cb4f0685868",
+            "name": "name action",
+            "level": 4,
+            "timestamp": 1691152999
+        }
+    ]
+}

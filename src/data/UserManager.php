@@ -19,15 +19,15 @@ class UserManager
         return (array) $data["user"];
     }
 
-    public function upgradeLevel(): void
+
+    public function upgradeLevel()
     {
         $data = $this->getData();
-
-        $data["level"] += 1;
+        $data["level"] += 0.2;
+        $data["level"] = round($data["level"], 1);
 
         $this->jsonHandler->writeData("user", $data);
-
-        # code...
+        return $data["level"];
     }
 }
 
