@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Data\ActionManager;
 use App\Data\SkillsManager;
 use App\Data\UserManager;
@@ -71,7 +73,7 @@ $app->get('/specific-skills', function (Request $request, Response $response) us
 
 });
 
-$app->post('/actions/add', function (Request $request, Response $response, array $args) use ($action, $skills) {
+$app->post('/actions/add', function (Request $request, Response $response, array $args) use ($action, $skills, $user) {
 
     $postData = ["id_skill", "name", "level"];
     $data = $request->getParsedBody();
@@ -98,7 +100,6 @@ $app->post('/actions/add', function (Request $request, Response $response, array
 
     }
 
-
     $newAction = [];
 
     $newAction = [
@@ -112,6 +113,16 @@ $app->post('/actions/add', function (Request $request, Response $response, array
     $action->addNewAction($newAction);
 
     // add level skill
+
+    $nextSkill = ceil($actionSkill["level"]);
+    
+    $newSkill = $skills->updateLevel($actionSkill["id"], $data["level"]);
+
+    if($newSkill["level"] >= $actionSkill["level"])
+    {
+        $user->upgradeLevel();
+    }
+    
 
     $response->getBody()->write(json_encode("result"));
     return $response

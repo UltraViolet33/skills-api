@@ -18,6 +18,17 @@ class UserManager
         $data = $this->jsonHandler->getData();
         return (array) $data["user"];
     }
+
+    public function upgradeLevel(): void
+    {
+        $data = $this->getData();
+
+        $data["level"] += 1;
+
+        $this->jsonHandler->writeData("user", $data);
+
+        # code...
+    }
 }
 
 ?>

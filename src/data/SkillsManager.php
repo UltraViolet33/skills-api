@@ -43,6 +43,38 @@ class SkillsManager
 
         throw new \Exception('Skill with id' . $id . "was not found");
     }
+
+
+    public function editSkill(string $idSkill, array $newSkill)
+    {
+        $allSkills = $this->getAll();
+
+        foreach ($allSkills as $i => $skillCategory) {
+            foreach ($skillCategory as $j => $skill) {
+                $skill = (array) $skill;
+                if ($skill["id"] === $idSkill) {
+                    // $skill = $newSkill;
+                    $allSkills[$i][$j] = $newSkill;
+                }
+            }
+        }
+        // throw new \Exception('Skill with id' . $id . "was not found");
+
+        $this->jsonHandler->writeData("skills", $allSkills);
+    }
+
+
+    public function updateLevel(string $idSkill, float $level): array
+    {
+        $skill = $this->getById($idSkill);
+
+        $test = 0.2 * $level;
+
+        $skill["level"] = bcadd((string)$skill['level'], (string) $test);
+        $this->editSkill($idSkill, $skill);
+
+        return $skill;
+    }
 }
 
 ?>
