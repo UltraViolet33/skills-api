@@ -28,6 +28,24 @@ class ActionManager
 
         $this->jsonHandler->writeData("actions", $allActions);
     }
+
+
+    public function getActionsSkill(string $idSkill): array
+    {
+        $allActions = $this->getAll();
+
+        // return [gettype($allActions)];
+
+        return array_filter($allActions, function($action)use ($idSkill){
+
+            $action = (array) $action;
+
+            if($action["id_skill"] === $idSkill)
+            {
+                return $action;
+            }
+        });
+    }
 }
 
 ?>

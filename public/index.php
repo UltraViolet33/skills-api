@@ -39,7 +39,7 @@ function checkLastSkillsActions()
     // if a skill has no action then do nothing
     // if the last action of a skill is more than 60 days, then downgrade and mark the date
 
-    // if a skill has alredy been downgrade more than 30 days ago and has no new actions then downgrade again
+    // if a skill has already been downgrade more than 30 days ago and has no new actions then downgrade again
 
 }
 
@@ -144,5 +144,25 @@ $app->get('/all-actions', function (Request $request, Response $response) use ($
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
+
+
+$app->get('/details-skills', function (Request $request, Response $response) use ($skills, $action) {
+    $params = $request->getQueryParams();
+    $idSkill= $params["idSkill"];
+
+    $skill = $skills->getById($idSkill);
+
+    $skill["actions"] = $action->getActionsSkill($skill["id"]);
+
+    // $skillsData = $skills->getSpecificSkills($category);
+    $response->getBody()->write(json_encode($skill));
+
+    return $response
+        ->withHeader('content-type', 'application/json')
+        ->withStatus(200);
+
+});
+
+
 
 $app->run();
