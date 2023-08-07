@@ -15,6 +15,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
 $app->addBodyParsingMiddleware();
 
 $app->addRoutingMiddleware();
@@ -54,6 +58,7 @@ $app->get('/user-data', function (Request $request, Response $response) use ($us
     $response->getBody()->write(json_encode($userData));
 
     return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
@@ -64,6 +69,7 @@ $app->get('/all-skills', function (Request $request, Response $response) use ($s
     $response->getBody()->write(json_encode($allSkills));
 
     return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
@@ -82,7 +88,7 @@ $app->get('/specific-skills', function (Request $request, Response $response) us
 
 });
 
-$app->post('/actions/add', function (Request $request, Response $response, array $args) use ($action, $skills, $user) {
+$app->post('/actions/add', function (Request $request, Response $response, array $args) use ($app, $action, $skills, $user) {
 
     $postData = ["id_skill", "name", "level"];
     $data = $request->getParsedBody();
@@ -91,7 +97,9 @@ $app->post('/actions/add', function (Request $request, Response $response, array
         if (!isset($data[$value]) || empty($data[$value])) {
             $response->getBody()->write(json_encode(["error" => "Missing fields"]));
             return $response
+                ->withHeader('Access-Control-Allow-Origin', '*')
                 ->withHeader('content-type', 'application/json')
+                ->withHeader('Accept', 'application/json')
                 ->withStatus(400);
         }
     }
@@ -103,6 +111,7 @@ $app->post('/actions/add', function (Request $request, Response $response, array
     } catch (Exception $e) {
         $response->getBody()->write(json_encode(["error" => "Id skill is not valid"]));
         return $response
+            ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('content-type', 'application/json')
             ->withStatus(400);
 
@@ -114,16 +123,14 @@ $app->post('/actions/add', function (Request $request, Response $response, array
         "id" => uniqid(),
         "id_skill" => $data["id_skill"],
         "name" => $data["name"],
-        "level" => $data["level"],
+        "level" => (int) $data["level"],
         "timestamp" => time()
     ];
 
     $action->addNewAction($newAction);
 
-    // add level skill
-
     $nextSkill = floor($actionSkill["level"] + 1);
-    $newSkill = $skills->updateLevel($actionSkill["id"], $data["level"]);
+    $newSkill = $skills->updateLevel($actionSkill["id"], (int) $data["level"]);
 
     if ($newSkill["level"] >= $nextSkill) {
         $user->upgradeLevel();
@@ -131,6 +138,7 @@ $app->post('/actions/add', function (Request $request, Response $response, array
 
     $response->getBody()->write(json_encode($newSkill));
     return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
@@ -148,13 +156,12 @@ $app->get('/all-actions', function (Request $request, Response $response) use ($
 
 $app->get('/details-skills', function (Request $request, Response $response) use ($skills, $action) {
     $params = $request->getQueryParams();
-    $idSkill= $params["idSkill"];
+    $idSkill = $params["idSkill"];
 
     $skill = $skills->getById($idSkill);
 
     $skill["actions"] = $action->getActionsSkill($skill["id"]);
 
-    // $skillsData = $skills->getSpecificSkills($category);
     $response->getBody()->write(json_encode($skill));
 
     return $response

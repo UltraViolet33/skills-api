@@ -34,14 +34,11 @@ class ActionManager
     {
         $allActions = $this->getAll();
 
-        // return [gettype($allActions)];
-
-        return array_filter($allActions, function($action)use ($idSkill){
+        return array_filter($allActions, function ($action) use ($idSkill) {
 
             $action = (array) $action;
 
-            if($action["id_skill"] === $idSkill)
-            {
+            if ($action["id_skill"] === $idSkill) {
                 return $action;
             }
         });

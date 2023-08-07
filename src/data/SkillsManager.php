@@ -42,7 +42,7 @@ class SkillsManager
             }
         }
 
-        throw new \Exception('Skill with id' . $id . "was not found");
+        // throw new \Exception('Skill with id' . $id . "was not found");
     }
 
 
