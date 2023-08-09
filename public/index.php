@@ -58,18 +58,39 @@ $app->get('/user-data', function (Request $request, Response $response) use ($us
     $response->getBody()->write(json_encode($userData));
 
     return $response
-        ->withHeader('Access-Control-Allow-Origin', '*')
+        // ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
 
 
-$app->get('/all-skills', function (Request $request, Response $response) use ($skills) {
+$app->get('/all-skills', function (Request $request, Response $response) use ($skills, $action) {
     $allSkills = $skills->getAll();
+    $allActions = $action->getAll();
+
+    foreach($allSkills as $i => $groupSkill)
+    {
+        foreach ($groupSkill as $j => $skill)
+        {
+            $skill = (array) $skill;
+            $allSkills[$i][$j] = (array) $allSkills[$i][$j];
+            $allSkills[$i][$j]["actions"] = [];
+
+            foreach ($allActions as $action)
+            {
+                $action = (array) $action;
+                if($skill["id"] === $action["id_skill"])
+                {
+                    $allSkills[$i][$j]["actions"][] = $action;
+                }
+            }
+        }
+    }
+
     $response->getBody()->write(json_encode($allSkills));
 
     return $response
-        ->withHeader('Access-Control-Allow-Origin', '*')
+        // ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
@@ -94,7 +115,7 @@ $app->post('/actions/add', function (Request $request, Response $response, array
     $data = $request->getParsedBody();
 
     foreach ($postData as $value) {
-        if (!isset($data[$value]) || empty($data[$value])) {
+        if (empty($data[$value])) {
             $response->getBody()->write(json_encode(["error" => "Missing fields"]));
             return $response
                 ->withHeader('Access-Control-Allow-Origin', '*')
