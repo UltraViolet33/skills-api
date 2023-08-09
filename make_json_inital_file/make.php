@@ -59,7 +59,7 @@ $data["skills"] = $skills;
 
 $data["actions"] = INITIAL_ACTIONS;
 
-$data["actions"][] = $action_example;
+// $data["actions"][] = $action_example;
 
 
 function return_array_skill(string $skillName): array
