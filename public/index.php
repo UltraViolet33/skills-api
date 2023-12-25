@@ -20,37 +20,16 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
 $app->addBodyParsingMiddleware();
-
 $app->addRoutingMiddleware();
-
 $app->add(new BasePathMiddleware($app));
-
 $app->addErrorMiddleware(true, true, true);
 
 const PATH_JSON_DATA = __DIR__ . "/../src/data/data.json";
 
 $jsonHandler = new JsonHandler(PATH_JSON_DATA);
-
 $user = new UserManager($jsonHandler);
 $skills = new SkillsManager($jsonHandler);
 $action = new ActionManager($jsonHandler);
-
-
-function checkLastSkillsActions()
-{
-
-    // check for the last action of each skill
-    // if a skill has no action then do nothing
-    // if the last action of a skill is more than 60 days, then downgrade and mark the date
-
-    // if a skill has already been downgrade more than 30 days ago and has no new actions then downgrade again
-
-}
-
-$app->get('/', function (Request $request, Response $response) {
-    $response->getBody()->write('Hello World!');
-    return $response;
-});
 
 
 $app->get('/user-data', function (Request $request, Response $response) use ($user) {
@@ -58,7 +37,6 @@ $app->get('/user-data', function (Request $request, Response $response) use ($us
     $response->getBody()->write(json_encode($userData));
 
     return $response
-        // ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
@@ -68,19 +46,15 @@ $app->get('/all-skills', function (Request $request, Response $response) use ($s
     $allSkills = $skills->getAll();
     $allActions = $action->getAll();
 
-    foreach($allSkills as $i => $groupSkill)
-    {
-        foreach ($groupSkill as $j => $skill)
-        {
+    foreach ($allSkills as $i => $groupSkill) {
+        foreach ($groupSkill as $j => $skill) {
             $skill = (array) $skill;
             $allSkills[$i][$j] = (array) $allSkills[$i][$j];
             $allSkills[$i][$j]["actions"] = [];
 
-            foreach ($allActions as $action)
-            {
+            foreach ($allActions as $action) {
                 $action = (array) $action;
-                if($skill["id"] === $action["id_skill"])
-                {
+                if ($skill["id"] === $action["id_skill"]) {
                     $allSkills[$i][$j]["actions"][] = $action;
                 }
             }
@@ -90,24 +64,10 @@ $app->get('/all-skills', function (Request $request, Response $response) use ($s
     $response->getBody()->write(json_encode($allSkills));
 
     return $response
-        // ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
 
-
-$app->get('/specific-skills', function (Request $request, Response $response) use ($skills) {
-    $params = $request->getQueryParams();
-    $category = $params["cat"];
-
-    $skillsData = $skills->getSpecificSkills($category);
-    $response->getBody()->write(json_encode($skillsData));
-
-    return $response
-        ->withHeader('content-type', 'application/json')
-        ->withStatus(200);
-
-});
 
 $app->post('/actions/add', function (Request $request, Response $response, array $args) use ($app, $action, $skills, $user) {
 
@@ -125,7 +85,6 @@ $app->post('/actions/add', function (Request $request, Response $response, array
         }
     }
 
-
     try {
 
         $actionSkill = $skills->getById($data["id_skill"]);
@@ -135,7 +94,6 @@ $app->post('/actions/add', function (Request $request, Response $response, array
             ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('content-type', 'application/json')
             ->withStatus(400);
-
     }
 
     $newAction = [];
@@ -163,34 +121,5 @@ $app->post('/actions/add', function (Request $request, Response $response, array
         ->withHeader('content-type', 'application/json')
         ->withStatus(200);
 });
-
-
-$app->get('/all-actions', function (Request $request, Response $response) use ($action) {
-    $allActions = $action->getAll();
-    $response->getBody()->write(json_encode($allActions));
-
-    return $response
-        ->withHeader('content-type', 'application/json')
-        ->withStatus(200);
-});
-
-
-$app->get('/details-skills', function (Request $request, Response $response) use ($skills, $action) {
-    $params = $request->getQueryParams();
-    $idSkill = $params["idSkill"];
-
-    $skill = $skills->getById($idSkill);
-
-    $skill["actions"] = $action->getActionsSkill($skill["id"]);
-
-    $response->getBody()->write(json_encode($skill));
-
-    return $response
-        ->withHeader('content-type', 'application/json')
-        ->withStatus(200);
-
-});
-
-
 
 $app->run();
