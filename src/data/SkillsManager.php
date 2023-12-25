@@ -8,7 +8,7 @@ use App\JsonHandler;
 
 class SkillsManager
 {
-    public function __construct(public JsonHandler $jsonHandler)
+    public function __construct(private JsonHandler $jsonHandler)
     {
     }
 
@@ -41,8 +41,6 @@ class SkillsManager
                 }
             }
         }
-
-        // throw new \Exception('Skill with id' . $id . "was not found");
     }
 
 
@@ -75,5 +73,3 @@ class SkillsManager
         return $skill;
     }
 }
-
-?>

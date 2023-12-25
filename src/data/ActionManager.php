@@ -8,7 +8,7 @@ use App\JsonHandler;
 
 class ActionManager
 {
-    public function __construct(public JsonHandler $jsonHandler)
+    public function __construct(private JsonHandler $jsonHandler)
     {
     }
 
@@ -25,7 +25,6 @@ class ActionManager
         $allActions = $this->getAll();
 
         $allActions[] = $action;
-
         $this->jsonHandler->writeData("actions", $allActions);
     }
 
@@ -44,5 +43,3 @@ class ActionManager
         });
     }
 }
-
-?>

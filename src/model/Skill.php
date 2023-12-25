@@ -26,7 +26,3 @@ class Skill
         return ["id" => $this->id, "name" => $this->name, "level" => $this->name];
     }
 }
-
-
-
-?>

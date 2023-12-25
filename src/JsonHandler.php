@@ -7,7 +7,7 @@ namespace App;
 class JsonHandler
 {
 
-    public function __construct(public string $path)
+    public function __construct(private string $path)
     {
     }
 
@@ -29,6 +29,3 @@ class JsonHandler
         fclose($fp);
     }
 }
-
-
-?>
