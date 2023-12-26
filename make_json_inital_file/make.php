@@ -1,6 +1,6 @@
 <?php
 
-const COMPULSORY_SKILLS = ["nutrition", "physical activity", "sleep"];
+const COMPULSORY_SKILLS = ["nutrition", "physical activity"];
 
 const BASIC_SKILLS = [
     "history",

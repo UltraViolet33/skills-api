@@ -68,7 +68,10 @@ $app->get('/all-skills', function (Request $request, Response $response) use ($s
         ->withStatus(200);
 });
 
-
+/**
+ * add action to a skill 
+ * and upgrade user level
+ */
 $app->post('/actions/add', function (Request $request, Response $response, array $args) use ($app, $action, $skills, $user) {
 
     $postData = ["id_skill", "name", "level"];
